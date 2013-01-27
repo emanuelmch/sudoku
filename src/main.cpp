@@ -1,8 +1,13 @@
+
 #include "rules/board.h"
+
+#include "solvers/solver.h"
+#include "solvers/optimistic.h"
 
 #include <iostream>
 
 using Bill::Sudoku::Board;
+using Bill::Sudoku::Solver;
 
 static inline void chooseBoard(Board *board) {
 	const int BOARD_COUNT = 2;
@@ -22,23 +27,48 @@ static inline void chooseBoard(Board *board) {
 	board->readString(boards[choice - 1]);
 }
 
-static inline void printBoard(Board *board) {
+static inline void printBoard(const Board *board) {
 	for (int i = 0; i < 9; i++) {
 		for (int j = 0; j < 9; j++) {
-			std::cout << board->get(j, i);
+			const int v = board->get(j, i);
+			std::cout << v;
 		}
 		std::cout << std::endl;
 	}
 }
 
+static inline Solver *chooseSolver() {
+	return new Bill::Sudoku::OptimisticSolver();
+}
+
+static void callback(const Board *board, const int column, const int row, const int value) {
+	std::cout << "New value: " << column << ":" << row << ":" << value << std::endl;
+}
+
 int main() {
 	Board board;
+	Solver *solver;
 
 	chooseBoard(&board);
 
 	std::cout << "Board chosen:" << std::endl;
 	printBoard(&board);
 
+	solver = chooseSolver();
+
+	solver->registerCallback(callback);
+
+	bool result = solver->solve(&board);
+
+	std::cout << std::endl << std::endl;
+	if (result)
+		std::cout << "Horray!" << std::endl << std::endl;
+	else
+		std::cout << "=(" << std::endl << std::endl;
+
+	printBoard(&board);
+
+	delete solver;
 	return 0;
 }
 

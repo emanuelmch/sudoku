@@ -1,3 +1,5 @@
+#pragma once 
+
 #include <string>
 
 namespace Bill {
@@ -5,11 +7,13 @@ namespace Sudoku {
 
 	class Board {
 	public:
-		int get(int x, int y);
-		int set(int x, int y, int value);
+		const int get(const int x, const int y) const;
+		void set(const int x, const int y, const int value);
 
 		void readString(const std::string);
 		void clear();
+
+		bool isFilled();
 
 		Board();
 		~Board();

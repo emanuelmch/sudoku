@@ -7,12 +7,11 @@ Bill::Sudoku::Board::Board() {
 Bill::Sudoku::Board::~Board() {
 }
 
-int Bill::Sudoku::Board::get(int x, int y) {
+const int Bill::Sudoku::Board::get(const int x, const int y) const {
 	return values[x][y];
 }
 
-int Bill::Sudoku::Board::set(int x, int y, int value)
-{
+void Bill::Sudoku::Board::set(const int x, const int y, const int value) {
 	values[x][y] = value;
 }
 
@@ -32,5 +31,16 @@ void Bill::Sudoku::Board::clear() {
 			values[i][j] = 0;
 		}
 	}
+}
+
+bool Bill::Sudoku::Board::isFilled() {
+	for (int i = 0; i < 9; i++) {
+		for (int j = 0; j < 9; j++) {
+			if (values[i][j] == 0)
+				return false;
+		}
+	}
+
+	return true;
 }
 
