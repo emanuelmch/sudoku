@@ -5,7 +5,14 @@ namespace Sudoku {
 	class Board {
 	public:
 		int get(int x, int y);
+		int set(int x, int y, int value);
+
 		void clear();
+
+		Board();
+		~Board();
+	private:
+		int values[9][9];
 	};
 
 }
