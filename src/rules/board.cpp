@@ -1,16 +1,13 @@
 #include "board.h"
 
-Bill::Sudoku::Board::Board()
-{
+Bill::Sudoku::Board::Board() {
 	clear();
 }
 
-Bill::Sudoku::Board::~Board()
-{
+Bill::Sudoku::Board::~Board() {
 }
 
-int Bill::Sudoku::Board::get(int x, int y)
-{
+int Bill::Sudoku::Board::get(int x, int y) {
 	return values[x][y];
 }
 
