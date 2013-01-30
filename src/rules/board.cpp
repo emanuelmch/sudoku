@@ -15,6 +15,19 @@ void Bill::Sudoku::Board::set(const int x, const int y, const int value) {
 	values[x][y] = value;
 }
 
+int Bill::Sudoku::Board::usedCells() const {
+	int count = 0;
+
+	for (int i = 0; i < 9; i++) {
+		for (int j = 0; j < 9; j++) {
+			if (values[j][i])
+				count++;
+		}
+	}
+
+	return count;
+}
+
 void Bill::Sudoku::Board::readString(const std::string value)
 {
 	for (int i = 0; i < 9; i++) {
