@@ -7,7 +7,7 @@ Bill::Sudoku::Board::Board() {
 Bill::Sudoku::Board::~Board() {
 }
 
-const int Bill::Sudoku::Board::get(const int x, const int y) const {
+int Bill::Sudoku::Board::get(const int x, const int y) const {
 	return values[x][y];
 }
 

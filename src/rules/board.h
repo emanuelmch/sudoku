@@ -7,7 +7,7 @@ namespace Sudoku {
 
 	class Board {
 	public:
-		const int get(const int x, const int y) const;
+		int get(const int x, const int y) const;
 		void set(const int x, const int y, const int value);
 
 		void readString(const std::string);

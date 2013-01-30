@@ -11,6 +11,8 @@ namespace Sudoku {
 	public:
 		virtual bool solve(Board *) = 0;
 		virtual void registerCallback(SolverCallback) = 0;
+
+		virtual ~Solver() { }
 	};
 
 }

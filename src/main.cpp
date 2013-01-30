@@ -42,6 +42,8 @@ static inline Solver *chooseSolver() {
 }
 
 static void callback(const Board *board, const int column, const int row, const int value) {
+	Board *b = (Board*)board;
+	b = b;
 	std::cout << "New value: " << column << ":" << row << ":" << value << std::endl;
 }
 
