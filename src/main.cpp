@@ -7,13 +7,15 @@
 using Bill::Sudoku::Board;
 using Bill::Sudoku::Solver;
 
-static const int BOARD_COUNT = 3;
+static const int BOARD_COUNT = 5;
 
-static inline void chooseBoard(Board *board, const int index) {
+static inline void readBoard(Board *board, const int index) {
 	std::string boards[BOARD_COUNT];
 	boards[0] = "001457936|007000200|306009005|130900042|864010309|070005018|700000503|009070001|613598400";	
-	boards[1] = "001457936|000000200|306000005|130900040|804010309|070005018|700000503|009000000|613598400";	
-	boards[2] = "942005010|000830040|035000000|680900420|700213006|093006075|000000730|020094000|060700954";
+	boards[1] = "942005010|000830040|035000000|680900420|700213006|093006075|000000730|020094000|060700954";
+	boards[2] = "000190400|000700600|206548090|000904300|008000000|001370000|000800045|010009200|000013987";
+	boards[3] = "000080410|600300900|800000035|080504000|005100000|730009150|410002003|000000601|200000080";
+	boards[4] = "070285010|008903500|000000000|500010008|010000090|900040003|000000000|002408600|090632080";
 
 	board->readString(boards[index]);
 }
@@ -37,18 +39,25 @@ int main() {
 
 	for (int i = 0; i < BOARD_COUNT; i++)
 	{
-		chooseBoard(&board, i);
-
-		std::cout << "Board chosen: ";
-		printBoard(&board);
+		readBoard(&board, i);
 
 		bool result = solver.solve(&board);
 		if (result)
-			std::cout << "=)            ";
+		{
+			std::cout << "Board " << i << " solved! =)" << std::endl;
+		}
 		else
-			std::cout << "=(            ";
+		{
+			std::cout << "Board " << i << " not solved! =( " << std::endl;
 
-		printBoard(&board);
+			std::cout << "Before: ";
+			Board original;
+			readBoard(&original, i);
+			printBoard(&original);
+
+			std::cout << "After: ";
+			printBoard(&board);
+		}
 	}
 
 	return 0;
