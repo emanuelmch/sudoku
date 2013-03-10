@@ -41,10 +41,12 @@ int main() {
 	{
 		readBoard(&board, i);
 
-		bool result = solver.solve(&board);
-		if (result)
+		if (solver.solve(&board))
 		{
-			std::cout << "Board " << i << " solved! =)" << std::endl;
+			if (board.validate())
+				std::cout << "Board " << i << " solved! =)" << std::endl;
+			else
+				std::cout << "Board " << i << " was solved, but in an invalid way! =(" << std::endl;
 		}
 		else
 		{
