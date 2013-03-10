@@ -14,13 +14,29 @@ Bill::Sudoku::Solver::~Solver() {
 static int lookForMove(const Board *board, const int column, const int row) {
 	int possibilities[10] = {0,};
 
-	// Look for "used up" possibilites
+	// Look for "used up" possibilites on the same column and/or row
 	for (int i = 0; i < 9; i++) {
 		int c = board->get(column, i);
 		int r = board->get(i, row);
 
 		possibilities[c] = 1;
 		possibilities[r] = 1;
+	}
+
+	// Look for "used up" possiblites on the same mini-grid
+	{
+		const int lookup_table[] = {0,0,0,3,3,3,6,6,6};
+		int min_c = lookup_table[column];
+		int max_c = min_c + 3;
+		int min_r = lookup_table[row];
+		int max_r = min_r + 3;
+
+		for (int c = min_c; c < max_c; c++)
+			for (int r = min_r; r < max_r; r++)
+			{
+				int value = board->get(c, r);
+				possibilities[value] = 1;
+			}
 	}
 
 	// See if there's only one possibility :)
