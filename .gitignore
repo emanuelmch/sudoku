@@ -1,4 +1,11 @@
 build/
+
+# Executable binaries
 debug
 release
 test
+
+# Executable windows binaries
+debug.exe
+release.exe
+test.exe
