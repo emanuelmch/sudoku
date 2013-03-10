@@ -17,7 +17,7 @@ static inline void readBoard(Board *board, const int index) {
 	boards[3] = "000080410|600300900|800000035|080504000|005100000|730009150|410002003|000000601|200000080";
 	boards[4] = "070285010|008903500|000000000|500010008|010000090|900040003|000000000|002408600|090632080";
 
-	board->readString(boards[index]);
+	board->read(boards[index]);
 }
 
 static inline void printBoard(const Board *board) {

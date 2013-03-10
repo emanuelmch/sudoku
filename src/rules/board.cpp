@@ -28,7 +28,7 @@ int Bill::Sudoku::Board::usedCells() const {
 	return count;
 }
 
-void Bill::Sudoku::Board::readString(const std::string value) {
+void Bill::Sudoku::Board::read(const std::string value) {
 	for (int i = 0; i < 9; i++) {
 		for (int j = 0; j < 9; j++) {
 			char c = value[i * 10 + j];

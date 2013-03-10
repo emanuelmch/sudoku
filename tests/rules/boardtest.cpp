@@ -26,7 +26,7 @@ void BoardTest::testClear() {
 
 inline static void testValidateBoard(const std::string values, const bool expected) {
 	Board board;
-	board.readString(values);
+	board.read(values);
 
 	bool actual = board.validate();
 	CPPUNIT_ASSERT_EQUAL(expected, actual);

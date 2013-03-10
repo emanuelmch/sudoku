@@ -13,7 +13,7 @@ namespace Sudoku {
 		void set(const int x, const int y, const int value);
 
 		int usedCells() const;
-		void readString(const std::string);
+		void read(const std::string);
 		void clear();
 
 		bool isFilled();
