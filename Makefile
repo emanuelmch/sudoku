@@ -25,7 +25,7 @@ REL_DEPS := $(patsubst $(SRC_DIR)/%.cpp, $(REL_DEP_DIR)/%.d, $(SRCS))
 TESTS := $(shell find $(TSS_DIR) -type f -name \*.cpp)
 TST_OBJS := $(patsubst $(TSS_DIR)/%.cpp, $(TST_DIR)/%.o, $(TESTS))
 
-all: release
+all: release test
 
 #
 # RUNNER TARGETS
