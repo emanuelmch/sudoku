@@ -1,8 +1,6 @@
 
 #include "rules/board.h"
-
-#include "solvers/solver.h"
-#include "solvers/optimistic.h"
+#include "solver/solver.h"
 
 #include <iostream>
 
@@ -33,22 +31,9 @@ static inline void printBoard(const Board *board) {
 	std::cout << std::endl;
 }
 
-static inline Solver *chooseSolver() {
-	return new Bill::Sudoku::OptimisticSolver();
-}
-
-//static void callback(const Board *board, const int column, const int row, const int value) {
-	//Board *b = (Board*)board;
-	//b = b;
-	//std::cout << "New value: " << column << ":" << row << ":" << value << std::endl;
-//}
-
 int main() {
 	Board board;
-	Solver *solver;
-
-	solver = chooseSolver();
-	//solver->registerCallback(callback);
+	Solver solver;
 
 	for (int i = 0; i < BOARD_COUNT; i++)
 	{
@@ -57,7 +42,7 @@ int main() {
 		std::cout << "Board chosen: ";
 		printBoard(&board);
 
-		bool result = solver->solve(&board);
+		bool result = solver.solve(&board);
 		if (result)
 			std::cout << "=)            ";
 		else
@@ -65,8 +50,6 @@ int main() {
 
 		printBoard(&board);
 	}
-
-	delete solver;
 
 	return 0;
 }

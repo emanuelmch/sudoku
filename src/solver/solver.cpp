@@ -1,14 +1,14 @@
-#include "optimistic.h"
+#include "solver.h"
 
 #include <cstddef>
 
 using Bill::Sudoku::Board;
 
-Bill::Sudoku::OptimisticSolver::OptimisticSolver() {
+Bill::Sudoku::Solver::Solver() {
 	this->callback = NULL;
 }
 
-Bill::Sudoku::OptimisticSolver::~OptimisticSolver() {
+Bill::Sudoku::Solver::~Solver() {
 }
 
 static int lookForMove(const Board *board, const int column, const int row) {
@@ -37,7 +37,7 @@ static int lookForMove(const Board *board, const int column, const int row) {
 	return only;
 }
 
-bool Bill::Sudoku::OptimisticSolver::solve(Board *board) {
+bool Bill::Sudoku::Solver::solve(Board *board) {
 	bool found;
 	do {
 		found = false;
@@ -59,11 +59,11 @@ bool Bill::Sudoku::OptimisticSolver::solve(Board *board) {
 	return board->isFilled();
 }
 
-void Bill::Sudoku::OptimisticSolver::registerCallback(SolverCallback call) {
+void Bill::Sudoku::Solver::registerCallback(SolverCallback call) {
 	this->callback = call;
 }
 
-void Bill::Sudoku::OptimisticSolver::moveFound(const Board *board, const int column, const int row, const int value) {
+void Bill::Sudoku::Solver::moveFound(const Board *board, const int column, const int row, const int value) {
 	if (this->callback)
 		callback(board, column, row, value);
 }
