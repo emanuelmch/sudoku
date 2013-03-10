@@ -17,6 +17,7 @@ namespace Sudoku {
 		void clear();
 
 		bool isFilled();
+		bool validate();
 
 		Board();
 		~Board();

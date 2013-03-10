@@ -28,8 +28,7 @@ int Bill::Sudoku::Board::usedCells() const {
 	return count;
 }
 
-void Bill::Sudoku::Board::readString(const std::string value)
-{
+void Bill::Sudoku::Board::readString(const std::string value) {
 	for (int i = 0; i < 9; i++) {
 		for (int j = 0; j < 9; j++) {
 			char c = value[i * 10 + j];
@@ -57,3 +56,21 @@ bool Bill::Sudoku::Board::isFilled() {
 	return true;
 }
 
+bool Bill::Sudoku::Board::validate() {
+	// First, validate rows and columns
+	for (int i = 0; i < 9; i++) {
+		for (int j = 0; j < 9; j++) {
+			if (values[i][j] == 0)
+				continue;
+
+			for (int x = 0; x < 9; x++) {
+				if (i != x && values[i][j] == values[x][j])
+					return false;
+				if (j != x && values[i][j] == values[i][x])
+					return false;
+			}
+		}	
+	}
+
+	return true;
+}
