@@ -12,8 +12,12 @@ class BoardTest : public CppUnit::TestFixture {
 	CPPUNIT_TEST(testValidateEmptyBoard);
 	CPPUNIT_TEST(testValidateHalfFullBoard);
 	CPPUNIT_TEST(testValidateFullBoard);
-	CPPUNIT_TEST(testValidateHalfFullInvalidBoard);
-	CPPUNIT_TEST(testValidateFullInvalidBoard);
+	CPPUNIT_TEST(testValidateHalfFullInvalidBoard_Row);
+	CPPUNIT_TEST(testValidateFullInvalidBoard_Row);
+	CPPUNIT_TEST(testValidateHalfFullInvalidBoard_Column);
+	CPPUNIT_TEST(testValidateFullInvalidBoard_Column);
+	CPPUNIT_TEST(testValidateHalfFullInvalidBoard_Mini);
+	CPPUNIT_TEST(testValidateFullInvalidBoard_Mini);
 
 	CPPUNIT_TEST_SUITE_END();
 
@@ -26,7 +30,11 @@ public:
 	void testValidateEmptyBoard();
 	void testValidateHalfFullBoard();
 	void testValidateFullBoard();
-	void testValidateHalfFullInvalidBoard();
-	void testValidateFullInvalidBoard();
+	void testValidateHalfFullInvalidBoard_Row();
+	void testValidateFullInvalidBoard_Row();
+	void testValidateHalfFullInvalidBoard_Column();
+	void testValidateFullInvalidBoard_Column();
+	void testValidateHalfFullInvalidBoard_Mini();
+	void testValidateFullInvalidBoard_Mini();
 };
 

@@ -44,11 +44,30 @@ void BoardTest::testValidateFullBoard() {
 	testValidateBoard("942675318|176832549|835149267|681957423|754213896|293486175|419568732|527394681|368721954", true);
 }
 
-void BoardTest::testValidateHalfFullInvalidBoard() {
-	testValidateBoard("942005010|000830040|035000000|680900420|700213006|903006075|000000730|020094000|060700954", false);
+void BoardTest::testValidateHalfFullInvalidBoard_Row() {
+	testValidateBoard("942005010|000830040|035000000|680900420|700213006|093006075|300000730|020094000|060700954", false);
 }
 
-void BoardTest::testValidateFullInvalidBoard() {
-	testValidateBoard("942675318|176832549|835149267|681917423|754253896|293486175|419568732|527394681|368721954", false);
+void BoardTest::testValidateFullInvalidBoard_Row() {
+	// TODO: Try and find a better board for this test - as it is, it has both row, column AND mini duplicates
+	testValidateBoard("942675318|176832549|835149267|681957423|754213896|293486175|319568732|527394681|368721954", false);
+}
+
+void BoardTest::testValidateHalfFullInvalidBoard_Column() {
+	testValidateBoard("942005010|000830040|035000000|680900420|700213006|093006075|900000730|020094000|060700954", false);
+}
+
+void BoardTest::testValidateFullInvalidBoard_Column() {
+	// TODO: Try and find a better board for this test - as it is, it has both row, column AND mini duplicates
+	testValidateBoard("942675318|176832549|835149267|681957423|754213896|293486175|319568732|527394681|368721954", false);
+}
+
+void BoardTest::testValidateHalfFullInvalidBoard_Mini() {
+	testValidateBoard("942005010|000830040|035000000|680900420|700213006|093006075|200000730|020094000|060700954", false);
+}
+
+void BoardTest::testValidateFullInvalidBoard_Mini() {
+	// TODO: Try and find a better board for this test - as it is, it has both row, column AND mini duplicates
+	testValidateBoard("942675318|176832549|835149267|681957423|754213896|293486175|319568732|527394681|368721954", false);
 }
 
