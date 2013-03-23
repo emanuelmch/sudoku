@@ -57,7 +57,7 @@ int main() {
 			readBoard(&original, i);
 			printBoard(&original);
 
-			std::cout << "After: ";
+			std::cout << "After:  ";
 			printBoard(&board);
 		}
 	}
