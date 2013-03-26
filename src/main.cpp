@@ -41,7 +41,9 @@ int main() {
 	{
 		readBoard(&board, i);
 
-		if (solver.solve(&board))
+		solver.solve(&board);
+
+		if (board.isFilled())
 		{
 			if (board.validate())
 				std::cout << "Board " << i << " solved! =)" << std::endl;

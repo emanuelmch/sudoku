@@ -53,7 +53,7 @@ static int lookForMove(const Board *board, const int column, const int row) {
 	return only;
 }
 
-bool Bill::Sudoku::Solver::solve(Board *board) {
+void Bill::Sudoku::Solver::solve(Board *board) {
 	bool found;
 	do {
 		found = false;
@@ -71,8 +71,6 @@ bool Bill::Sudoku::Solver::solve(Board *board) {
 			}
 		}
 	} while (found);
-
-	return board->isFilled();
 }
 
 void Bill::Sudoku::Solver::registerCallback(SolverCallback call) {

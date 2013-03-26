@@ -12,7 +12,7 @@ namespace Sudoku {
 		Solver();
 		~Solver();
 
-		bool solve(Board *);
+		void solve(Board *);
 		void registerCallback(SolverCallback);
 
 	private:
