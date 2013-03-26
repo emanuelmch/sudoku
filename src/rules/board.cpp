@@ -59,19 +59,20 @@ bool Bill::Sudoku::Board::isFilled() {
 }
 
 static inline bool validateMiniGrid(BoardValues &values, int x, int y) {
-	int usedValues[10] = {0,};
+	bool usedValues[10] = {false,};
 
 	for (int i = x; i < (x + 3); i++) {
 		for (int j = y; j < (y + 3); j++) {
 			int v = values[i][j];
-			usedValues[v]++;
-		}
-	}
 
-	for (int i = 1; i < 10; i++)
-	{
-		if (usedValues[i] > 1)
-			return false;
+			if (v == 0)
+				continue;
+
+			if (usedValues[v])
+				return false;
+
+			usedValues[v] = true;
+		}
 	}
 
 	return true;
@@ -79,8 +80,8 @@ static inline bool validateMiniGrid(BoardValues &values, int x, int y) {
 
 bool Bill::Sudoku::Board::validate() {
 	// First, validate rows and columns
-	for (int i = 0; i < 9; i++) {
-		for (int j = 0; j < 9; j++) {
+	for (int i = 0; i < GRID_SIZE; i++) {
+		for (int j = 0; j < GRID_SIZE; j++) {
 			if (values[i][j] == 0)
 				continue;
 
@@ -94,15 +95,13 @@ bool Bill::Sudoku::Board::validate() {
 	}
 
 	// Now, validate every mini-grid
-	if (!validateMiniGrid(values, 0, 0)) return false;
-	if (!validateMiniGrid(values, 0, 3)) return false;
-	if (!validateMiniGrid(values, 0, 6)) return false;
-	if (!validateMiniGrid(values, 3, 0)) return false;
-	if (!validateMiniGrid(values, 3, 3)) return false;
-	if (!validateMiniGrid(values, 3, 6)) return false;
-	if (!validateMiniGrid(values, 6, 0)) return false;
-	if (!validateMiniGrid(values, 6, 3)) return false;
-	if (!validateMiniGrid(values, 6, 6)) return false;
+	for (int i = 0; i < GRID_SIZE; i += MINI_GRID_SIZE) {
+		for (int j = 0; j < GRID_SIZE; j += MINI_GRID_SIZE) {
+			bool result = validateMiniGrid(values, i, j);
+			if (!result)
+				return false;
+		}
+	}
 
 	return true;
 }
