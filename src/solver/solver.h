@@ -17,7 +17,15 @@ namespace Sudoku {
 
 	private:
 		SolverCallback callback;
-		void moveFound(const Bill::Sudoku::Board *board, const int line, const int row, const int value);
+
+		int possibilities[Board::GRID_SIZE][Board::GRID_SIZE][Board::GRID_SIZE + 1];
+
+		void cleanPossibilities();
+		void fillPossibilities(Board*);
+		void fillPossibilities(Board*, int x, int y);
+		bool checkPossibilities(Board*);
+
+		void moveFound(Bill::Sudoku::Board *board, const int line, const int row, const int value);
 	};
 
 }
