@@ -1,6 +1,7 @@
 #include "solver.h"
 
 #include <cstddef>
+#include <cstring>
 
 using Bill::Sudoku::Board;
 
@@ -13,19 +14,13 @@ Bill::Sudoku::Solver::~Solver() {
 
 void Bill::Sudoku::Solver::solve(Board *board) {
 	do {
-		cleanPossibilities();
+		clearPossibilities();
 		fillPossibilities(board);
 	} while (checkPossibilities(board));
 }
 
-void Bill::Sudoku::Solver::cleanPossibilities() {
-	for (int i = 0; i < Board::GRID_SIZE; i++) {
-		for (int j = 0; j < Board::GRID_SIZE; j++) {
-			for (int x = 1; x < Board::GRID_SIZE + 1; x++) {
-				possibilities[i][j][x] = 0;
-			}
-		}
-	}
+void Bill::Sudoku::Solver::clearPossibilities() {
+	memset(possibilities, 0, sizeof(int) * Board::GRID_SIZE * Board::GRID_SIZE * (Board::GRID_SIZE + 1));
 }
 
 void Bill::Sudoku::Solver::fillPossibilities(Board *board) {
