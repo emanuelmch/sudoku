@@ -9,3 +9,6 @@ test
 debug.exe
 release.exe
 test.exe
+
+# Default log files
+val.log
