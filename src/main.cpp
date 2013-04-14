@@ -1,11 +1,14 @@
 
 #include "rules/board.h"
+
+#include "solver/solver.h"
 #include "solver/billsolver.h"
+#include "solver/brutesolver.h"
 
 #include <iostream>
 
 using Bill::Sudoku::Board;
-using Bill::Sudoku::BillSolver;
+using Bill::Sudoku::Solver;
 
 static const int BOARD_COUNT = 5;
 
@@ -33,15 +36,14 @@ static inline void printBoard(const Board *board) {
 	std::cout << std::endl;
 }
 
-int main() {
+void solveAllBoards(Solver *solver) {
 	Board board;
-	BillSolver solver;
 
 	for (int i = 0; i < BOARD_COUNT; i++)
 	{
 		readBoard(&board, i);
 
-		solver.solve(&board);
+		solver->solve(&board);
 
 		if (board.isFilled())
 		{
@@ -63,6 +65,16 @@ int main() {
 			printBoard(&board);
 		}
 	}
+}
+
+int main() {
+	std::cout << "Using BillSolver..." << std::endl;
+	Bill::Sudoku::BillSolver billSolver;
+	solveAllBoards(&billSolver);
+
+	std::cout << std::endl << "Using BruteSolver..." << std::endl;
+	Bill::Sudoku::BruteSolver bruteSolver;
+	solveAllBoards(&bruteSolver);
 
 	return 0;
 }
