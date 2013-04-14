@@ -1,11 +1,11 @@
 
 #include "rules/board.h"
-#include "solver/solver.h"
+#include "solver/billsolver.h"
 
 #include <iostream>
 
 using Bill::Sudoku::Board;
-using Bill::Sudoku::Solver;
+using Bill::Sudoku::BillSolver;
 
 static const int BOARD_COUNT = 5;
 
@@ -35,7 +35,7 @@ static inline void printBoard(const Board *board) {
 
 int main() {
 	Board board;
-	Solver solver;
+	BillSolver solver;
 
 	for (int i = 0; i < BOARD_COUNT; i++)
 	{

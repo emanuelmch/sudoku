@@ -1,11 +1,11 @@
 #pragma once
 
-#include "../../src/solver/solver.h"
+#include "../../src/solver/billsolver.h"
 
 #include <cppunit/extensions/HelperMacros.h>
 
-class SolverTest : public CppUnit::TestFixture {
-	CPPUNIT_TEST_SUITE(SolverTest);
+class BillSolverTest : public CppUnit::TestFixture {
+	CPPUNIT_TEST_SUITE(BillSolverTest);
 
 	CPPUNIT_TEST(testClearPossibilities);
 

@@ -1,4 +1,4 @@
-#include "solver.h"
+#include "billsolver.h"
 
 #include <cstddef>
 #include <cstring>
@@ -6,25 +6,25 @@
 
 using Bill::Sudoku::Board;
 
-Bill::Sudoku::Solver::Solver() {
+Bill::Sudoku::BillSolver::BillSolver() {
 	this->callback = NULL;
 }
 
-Bill::Sudoku::Solver::~Solver() {
+Bill::Sudoku::BillSolver::~BillSolver() {
 }
 
-void Bill::Sudoku::Solver::solve(Board *board) {
+void Bill::Sudoku::BillSolver::solve(Board *board) {
 	clearPossibilities();
 	do {
 		fillPossibilities(board);
 	} while (checkPossibilities(board));
 }
 
-void Bill::Sudoku::Solver::clearPossibilities() {
+void Bill::Sudoku::BillSolver::clearPossibilities() {
 	memset(possibilities, 0, sizeof(int) * Board::GRID_SIZE * Board::GRID_SIZE * (Board::GRID_SIZE + 1));
 }
 
-void Bill::Sudoku::Solver::fillPossibilities(Board *board) {
+void Bill::Sudoku::BillSolver::fillPossibilities(Board *board) {
 	for (int x = 0; x < Board::GRID_SIZE; x++) {
 		for (int y = 0; y < Board::GRID_SIZE; y++) {
 			if (board->get(x, y) == 0)
@@ -33,7 +33,7 @@ void Bill::Sudoku::Solver::fillPossibilities(Board *board) {
 	}
 }
 
-void Bill::Sudoku::Solver::fillPossibilities(Board *board, int x, int y) {
+void Bill::Sudoku::BillSolver::fillPossibilities(Board *board, int x, int y) {
 	for (int i = 0; i < Board::GRID_SIZE; i++) {
 		// Look for "used up" possibilities in the same column/row
 		int c = board->get(x, i);
@@ -60,7 +60,7 @@ void Bill::Sudoku::Solver::fillPossibilities(Board *board, int x, int y) {
 	}
 }
 
-bool Bill::Sudoku::Solver::checkPossibilities(Board *board) {
+bool Bill::Sudoku::BillSolver::checkPossibilities(Board *board) {
 	bool foundAny = false;
 	for (int i = 0; i < Board::GRID_SIZE; i++) {
 		for (int j = 0; j < Board::GRID_SIZE; j++) {
@@ -85,11 +85,11 @@ bool Bill::Sudoku::Solver::checkPossibilities(Board *board) {
 	return foundAny;
 }
 
-void Bill::Sudoku::Solver::registerCallback(SolverCallback call) {
+void Bill::Sudoku::BillSolver::registerCallback(SolverCallback call) {
 	this->callback = call;
 }
 
-void Bill::Sudoku::Solver::moveFound(Board *board, const int column, const int row, const int value) {
+void Bill::Sudoku::BillSolver::moveFound(Board *board, const int column, const int row, const int value) {
 	board->set(column, row, value);
 	if (this->callback)
 		callback(board, column, row, value);

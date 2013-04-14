@@ -1,17 +1,17 @@
-#include "solvertest.h"
+#include "billsolvertest.h"
 
 #include <iostream>
 
-using Bill::Sudoku::Solver;
+using Bill::Sudoku::BillSolver;
 using Bill::Sudoku::Board;
 
-CPPUNIT_TEST_SUITE_REGISTRATION(SolverTest);
+CPPUNIT_TEST_SUITE_REGISTRATION(BillSolverTest);
 
-void SolverTest::setUp() {}
-void SolverTest::tearDown() {}
+void BillSolverTest::setUp() {}
+void BillSolverTest::tearDown() {}
 
-void SolverTest::testClearPossibilities() {
-	Solver solver;
+void BillSolverTest::testClearPossibilities() {
+	BillSolver solver;
 
 	for (int i = 0; i < Board::GRID_SIZE; i++) {
 		for (int j = 0; j < Board::GRID_SIZE; j++) {
