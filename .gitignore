@@ -12,3 +12,11 @@ test.exe
 
 # Default log files
 val.log
+
+# Code::Blocks generated files
+Sudoku.depend
+Sudoku.layout
+bin
+obj
+ValgrindOut.xml
+

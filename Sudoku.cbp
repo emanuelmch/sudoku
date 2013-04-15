@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="Sudoku" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/Sudoku" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/Sudoku" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-fomit-frame-pointer" />
+					<Add option="-fexpensive-optimizations" />
+					<Add option="-O3" />
+				</Compiler>
+			</Target>
+			<Target title="Tests/Debug">
+				<Option output="bin/Tests/Debug/Sudoku" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Tests/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+				<Linker>
+					<Add library="cppunit" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-ansi" />
+			<Add option="-fexceptions" />
+			<Add option="-march=core2" />
+			<Add option="-pedantic" />
+			<Add option="-std=c++11" />
+			<Add option="-Wall" />
+			<Add option="-Weffc++" />
+			<Add option="-Wextra" />
+			<Add option="-Wfloat-equal" />
+			<Add option="-Winline" />
+			<Add option="-Wundef" />
+			<Add option="-Wunreachable-code" />
+			<Add option="-Wswitch-enum" />
+		</Compiler>
+		<Unit filename="src/main.cpp">
+			<Option target="Debug" />
+			<Option target="Release" />
+		</Unit>
+		<Unit filename="src/rules/board.cpp" />
+		<Unit filename="src/rules/board.h" />
+		<Unit filename="src/solver/billsolver.cpp" />
+		<Unit filename="src/solver/billsolver.h" />
+		<Unit filename="src/solver/brutesolver.cpp" />
+		<Unit filename="src/solver/brutesolver.h" />
+		<Unit filename="src/solver/solver.h" />
+		<Unit filename="tests/main.cpp">
+			<Option target="Tests/Debug" />
+		</Unit>
+		<Unit filename="tests/rules/billsolvertest.cpp">
+			<Option target="Tests/Debug" />
+		</Unit>
+		<Unit filename="tests/rules/billsolvertest.h">
+			<Option target="Tests/Debug" />
+		</Unit>
+		<Unit filename="tests/rules/boardtest.cpp">
+			<Option target="Tests/Debug" />
+		</Unit>
+		<Unit filename="tests/rules/boardtest.h">
+			<Option target="Tests/Debug" />
+		</Unit>
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
