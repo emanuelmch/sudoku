@@ -1,5 +1,7 @@
 #include "board.h"
 
+#include <cstring>
+
 typedef int BoardValues[9][9];
 
 Bill::Sudoku::Board::Board() {
@@ -39,12 +41,12 @@ void Bill::Sudoku::Board::read(const std::string value) {
 	}
 }
 
+void Bill::Sudoku::Board::copy(const Board *board) {
+    memcpy(values, board->values, sizeof(values));
+}
+
 void Bill::Sudoku::Board::clear() {
-	for (int i = 0; i < 9; i++) {
-		for (int j = 0; j < 9; j++) {
-			values[i][j] = 0;
-		}
-	}
+    memset(values, 0, sizeof(values));
 }
 
 bool Bill::Sudoku::Board::isFilled() {
