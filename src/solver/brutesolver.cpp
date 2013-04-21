@@ -3,56 +3,76 @@
 #include <queue>
 #include <vector>
 
-using Bill::Sudoku::SearchNode;
 using Bill::Sudoku::Board;
 
 using std::queue;
 using std::vector;
 
 void Bill::Sudoku::BruteSolver::solve(Board *originalBoard) {
-	SearchNode *firstNode = this->createFirstNode(originalBoard);
+	Board *firstBoard = new Board();
+	firstBoard->copy(originalBoard);
 
-	queue<SearchNode*> nodes;
-	nodes.push(firstNode);
+	queue<Board*> boards;
+	boards.push(firstBoard);
 
 	do {
-		// Process the first node in the queue
-		SearchNode *node = nodes.front();
-		vector<SearchNode*> newNodes = process(node);
+		// Process the first board in the queue
+		Board *board = boards.front();
+		vector<Board*> newBoards = process(board);
 
-		// Remove already process node from the queue
-		nodes.pop();
+		// Remove already process board from the queue
+		boards.pop();
 
-		// Go through the new nodes
-		for(vector<SearchNode*>::iterator it = newNodes.begin(); it != newNodes.end(); it++) {
-		    Board *board = (*it)->board;
-		    // If one of them is valid, GREAT! We found our solution
-		    if (board->validate()) {
-			originalBoard->copy(board);
-			// I know, this will many object un-deleted. I'll take care of it later
-			return;
+		// Go through the new boards
+		for(vector<Board*>::iterator it = newBoards.begin(); it != newBoards.end(); it++) {
+		    Board *board = (*it);
+
+		    if (board->isFilled()) {
+                // Only valid boards get to this point, so if it's filled, we found our solution!
+                originalBoard->copy(board);
+                // I know, this will leave many objects un-deleted. I'll take care of it later
+                return;
+		    } else {
+		        // If it ain't filled yet, just put it in the queue for further processing
+                boards.push((*it));
 		    }
-		    // Otherwise, put it in the queue for further processing
-		    nodes.push((*it));
 		}
 
-		// Now that we are done with it, delete the module
-		delete node;
-	} while (!nodes.empty());
-
+		// Now that we are done with it, delete the board
+		delete board;
+	// If we get to a point where we have no more boards to process, then that's when we give up
+	} while (!boards.empty());
 }
 
 void Bill::Sudoku::BruteSolver::registerCallback(SolverCallback call) {
 	this->callback = call;
 }
 
-SearchNode *Bill::Sudoku::BruteSolver::createFirstNode(Board *board) {
-	SearchNode *node = new SearchNode();
-	node->board = board;
-	return node;
+vector<Board*> createPossibleBoards(const Board *original, int x, int y) {
+	vector<Board*> boards;
+
+    for (int i = 1; i <= 9; i++) {
+		Board *board = new Board();
+		board->copy(original);
+		board->set(x, y, i);
+
+		if (board->validate()) {
+			boards.push_back(board);
+		} else {
+			delete board;
+		}
+	}
+
+	return boards;
 }
 
-vector<SearchNode*> Bill::Sudoku::BruteSolver::process(SearchNode *node) {
-	vector<SearchNode*> newVector;
-	return newVector;
+vector<Board*> Bill::Sudoku::BruteSolver::process(const Board *board) {
+	for (int y = 0; y < 9; y++) {
+		for (int x = 0; x < 9; x++) {
+			if (board->get(x, y) == 0)
+				return createPossibleBoards(board, x, y);
+		}
+	}
+
+	return vector<Board*>();
 }
