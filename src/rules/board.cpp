@@ -93,7 +93,7 @@ bool Bill::Sudoku::Board::validate() {
 				if (j != x && values[i][j] == values[i][x])
 					return false;
 			}
-		}	
+		}
 	}
 
 	// Now, validate every mini-grid

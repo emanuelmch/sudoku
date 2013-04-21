@@ -1,4 +1,4 @@
-﻿#include "brutesolver.h"
+#include "brutesolver.h"
 
 #include <queue>
 #include <vector>
