@@ -18,12 +18,14 @@ void Bill::Sudoku::BillSolver::fillPossibilities(Board *board) {
 	for(int x = 0; x < Board::GRID_SIZE; x++) {
 		for(int y = 0; y < Board::GRID_SIZE; y++) {
 			if(board->get(x, y) == 0)
-				fillPossibilities(board, x, y);
+				fillPossibilitiesEmpty(board, x, y);
+			else
+				fillPossibilitiesFilled(board, x, y);
 		}
 	}
 }
 
-void Bill::Sudoku::BillSolver::fillPossibilities(Board *board, int x, int y) {
+void Bill::Sudoku::BillSolver::fillPossibilitiesEmpty(Board *board, int x, int y) {
 	for(int i = 0; i < Board::GRID_SIZE; i++) {
 		// Look for "used up" possibilities in the same column/row
 		int c = board->get(x, i);
@@ -50,6 +52,14 @@ void Bill::Sudoku::BillSolver::fillPossibilities(Board *board, int x, int y) {
 	}
 }
 
+void Bill::Sudoku::BillSolver::fillPossibilitiesFilled(Board *board, int x, int y) {
+	int value = board->get(x, y);
+	for (int i = 1; i <= Board::GRID_SIZE; i++) {
+		if (i != value)
+			possibilities[x][y][i] = 1;
+	}
+}
+
 bool Bill::Sudoku::BillSolver::checkPossibilities(Board *board) {
 	bool foundAny = false;
 	for(int i = 0; i < Board::GRID_SIZE; i++) {
@@ -71,6 +81,33 @@ bool Bill::Sudoku::BillSolver::checkPossibilities(Board *board) {
 			}
 		}
 	}
+
+	// I know, I know, this is a fucking hindrance
+	if (!foundAny) {
+		// Look for "only this cell can be X in this row/column, even though it can be also be Y and Z"
+		for (int i = 0; i < Board::GRID_SIZE && !foundAny; i++) {
+			for (int x = 1; x < Board::GRID_SIZE + 1; x++) {
+				int only = 0;
+
+				for (int j = 0; j < Board::GRID_SIZE; j++) {
+					if (possibilities[i][j][x] == 0) {
+						if (only == 0)
+							only = j + 1;
+						else
+							only = -1;
+					}
+				}
+
+				if (only > 0) {
+					if (board->get(i, only - 1) == 0) {
+						board->set(i, only - 1, x);
+						foundAny = true;
+					}
+				}
+			}
+		}
+	}
+
 	return foundAny;
 }
 

@@ -16,7 +16,8 @@ namespace Bill {
 
 			void clearPossibilities();
 			void fillPossibilities(Board*);
-			void fillPossibilities(Board*, int x, int y);
+			void fillPossibilitiesEmpty(Board*, int x, int y);
+			void fillPossibilitiesFilled(Board*, int x, int y);
 			bool checkPossibilities(Board*);
 
 			friend class ::BillSolverTest;
