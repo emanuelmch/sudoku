@@ -34,7 +34,7 @@ gdb: debug
 	gdb ./debug
 
 valgrind: debug
-	valgrind --log-file=val.log ./debug
+	valgrind --log-file=val.log --leak-check=full ./debug
 
 check: test
 	./test
