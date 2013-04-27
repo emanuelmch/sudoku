@@ -54,10 +54,6 @@ void Bill::Sudoku::BruteSolver::solve(Board *originalBoard) {
 	} while(!boards.empty());
 }
 
-void Bill::Sudoku::BruteSolver::registerCallback(SolverCallback call) {
-	this->callback = call;
-}
-
 vector<Board*> *createPossibleBoards(const Board *original, const int x, const int y) {
 	vector<Board*> *boards = new vector<Board*>();
 

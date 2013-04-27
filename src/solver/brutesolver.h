@@ -9,11 +9,9 @@ namespace Bill {
 
 		class BruteSolver : public Solver {
 		public:
-			BruteSolver() : callback(NULL) { }
+			BruteSolver() { }
 			void solve(Board *);
-			void registerCallback(SolverCallback);
 		private:
-			SolverCallback callback;
 			std::vector<Board*> *process(const Board *) const;
 		};
 

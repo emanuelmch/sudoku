@@ -6,12 +6,6 @@
 
 using Bill::Sudoku::Board;
 
-Bill::Sudoku::BillSolver::BillSolver() : callback(NULL) {
-}
-
-Bill::Sudoku::BillSolver::~BillSolver() {
-}
-
 void Bill::Sudoku::BillSolver::solve(Board *board) {
 	clearPossibilities();
 	do {
@@ -74,22 +68,12 @@ bool Bill::Sudoku::BillSolver::checkPossibilities(Board *board) {
 					}
 				}
 				if(only > 0) {
-					moveFound(board, i, j, only);
+					board->set(i, j, only);
 					foundAny = true;
 				}
 			}
 		}
 	}
 	return foundAny;
-}
-
-void Bill::Sudoku::BillSolver::registerCallback(SolverCallback call) {
-	this->callback = call;
-}
-
-void Bill::Sudoku::BillSolver::moveFound(Board *board, const int column, const int row, const int value) {
-	board->set(column, row, value);
-	if(this->callback)
-		callback(board, column, row, value);
 }
 
