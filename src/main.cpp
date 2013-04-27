@@ -23,7 +23,7 @@ static inline void readBoard(Board *board, const int index) {
 }
 
 static inline void printBoard(const Board *board) {
-	std::cout << board->usedCells() << "/" << Board::CELL_AMOUNT << "  ";
+	std::cout << board->count() << "/" << Board::CELL_AMOUNT << "  ";
 
 	for(int i = 0; i < 9; i++) {
 		for(int j = 0; j < 9; j++) {

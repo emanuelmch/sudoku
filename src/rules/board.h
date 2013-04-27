@@ -17,7 +17,7 @@ namespace Bill {
 			int get(const int x, const int y) const;
 			void set(const int x, const int y, const int value);
 
-			int usedCells() const;
+			int count() const;
 			void clear();
 
 			bool isFilled() const;

@@ -19,7 +19,7 @@ void Bill::Sudoku::Board::set(const int x, const int y, const int value) {
 	values[x][y] = value;
 }
 
-int Bill::Sudoku::Board::usedCells() const {
+int Bill::Sudoku::Board::count() const {
 	int count = 0;
 
 	for(int i = 0; i < 9; i++) {
