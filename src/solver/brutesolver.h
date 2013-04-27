@@ -9,6 +9,7 @@ namespace Sudoku {
 
 	class BruteSolver : public Solver {
 	public:
+        BruteSolver () : callback(NULL) { }
 		void solve(Board *);
 		void registerCallback(SolverCallback);
 	private:

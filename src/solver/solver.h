@@ -9,6 +9,7 @@ namespace Sudoku {
 
 	class Solver {
 	public:
+        virtual ~Solver() { }
 		virtual void solve(Board *) = 0;
 		virtual void registerCallback(SolverCallback) = 0;
 	};

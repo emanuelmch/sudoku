@@ -6,8 +6,7 @@
 
 using Bill::Sudoku::Board;
 
-Bill::Sudoku::BillSolver::BillSolver() {
-	this->callback = NULL;
+Bill::Sudoku::BillSolver::BillSolver () : callback(NULL){
 }
 
 Bill::Sudoku::BillSolver::~BillSolver() {
