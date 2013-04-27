@@ -87,20 +87,34 @@ bool Bill::Sudoku::BillSolver::checkPossibilities(Board *board) {
 		// Look for "only this cell can be X in this row/column, even though it can be also be Y and Z"
 		for (int i = 0; i < Board::GRID_SIZE && !foundAny; i++) {
 			for (int x = 1; x < Board::GRID_SIZE + 1; x++) {
-				int only = 0;
+				int onlyOnRow = 0;
+				int onlyOnColumn = 0;
 
 				for (int j = 0; j < Board::GRID_SIZE; j++) {
 					if (possibilities[i][j][x] == 0) {
-						if (only == 0)
-							only = j + 1;
+						if (onlyOnRow == 0)
+							onlyOnRow = j + 1;
 						else
-							only = -1;
+							onlyOnRow = -1;
+					}
+
+					if (possibilities[j][i][x] == 0) {
+						if (onlyOnColumn == 0)
+							onlyOnColumn = j + 1;
+						else
+							onlyOnColumn = -1;
 					}
 				}
 
-				if (only > 0) {
-					if (board->get(i, only - 1) == 0) {
-						board->set(i, only - 1, x);
+				if (onlyOnRow > 0) {
+					if (board->get(i, onlyOnRow - 1) == 0) {
+						board->set(i, onlyOnRow - 1, x);
+						foundAny = true;
+					}
+				}
+				if (onlyOnColumn > 0) {
+					if (board->get(onlyOnColumn - 1, i) == 0) {
+						board->set(onlyOnColumn - 1, i, x);
 						foundAny = true;
 					}
 				}
