@@ -1,6 +1,6 @@
 #include "board.h"
 
-#include <cstring>
+#include <algorithm>
 
 typedef int BoardValues[9][9];
 
@@ -42,16 +42,17 @@ void Bill::Sudoku::Board::read(const std::string value) {
 }
 
 void Bill::Sudoku::Board::read(const Board *board) {
-	memcpy(values, board->values, sizeof(values));
+	std::copy(board->values, board->values + GRID_SIZE, this->values);
 }
 
 void Bill::Sudoku::Board::clear() {
-	memset(values, 0, sizeof(values));
+	const int arraySize = sizeof(values) / sizeof(values[0][0]);
+	std::fill(&values[0][0], &values[0][0] + arraySize, 0);
 }
 
 bool Bill::Sudoku::Board::isFilled() const {
-	for(int i = 0; i < 9; i++) {
-		for(int j = 0; j < 9; j++) {
+	for(int i = 0; i < GRID_SIZE; i++) {
+		for(int j = 0; j < GRID_SIZE; j++) {
 			if(values[i][j] == 0)
 				return false;
 		}

@@ -1,9 +1,5 @@
 #include "billsolver.h"
 
-#include <cstddef>
-#include <cstring>
-#include <iostream>
-
 using Bill::Sudoku::Board;
 
 void Bill::Sudoku::BillSolver::solve(Board *board) {
@@ -14,7 +10,8 @@ void Bill::Sudoku::BillSolver::solve(Board *board) {
 }
 
 void Bill::Sudoku::BillSolver::clearPossibilities() {
-	memset(possibilities, 0, sizeof(int) * Board::GRID_SIZE * Board::GRID_SIZE *(Board::GRID_SIZE + 1));
+	const int arraySize = sizeof(possibilities) / sizeof(possibilities[0][0][0]);
+	std::fill(&possibilities[0][0][0], &possibilities[0][0][0] + arraySize, 0);
 }
 
 void Bill::Sudoku::BillSolver::fillPossibilities(Board *board) {
