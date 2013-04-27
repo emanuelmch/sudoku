@@ -5,30 +5,30 @@
 class BillSolverTest;
 
 namespace Bill {
-namespace Sudoku {
+	namespace Sudoku {
 
-	class BillSolver : public Solver {
-	public:
-		BillSolver();
-		~BillSolver();
+		class BillSolver : public Solver {
+		public:
+			BillSolver();
+			~BillSolver();
 
-		void solve(Board *);
-		void registerCallback(SolverCallback);
+			void solve(Board *);
+			void registerCallback(SolverCallback);
 
-	private:
-		SolverCallback callback;
+		private:
+			SolverCallback callback;
 
-		int possibilities[Board::GRID_SIZE][Board::GRID_SIZE][Board::GRID_SIZE + 1];
+			int possibilities[Board::GRID_SIZE][Board::GRID_SIZE][Board::GRID_SIZE + 1];
 
-		void clearPossibilities();
-		void fillPossibilities(Board*);
-		void fillPossibilities(Board*, int x, int y);
-		bool checkPossibilities(Board*);
+			void clearPossibilities();
+			void fillPossibilities(Board*);
+			void fillPossibilities(Board*, int x, int y);
+			bool checkPossibilities(Board*);
 
-		void moveFound(Bill::Sudoku::Board *board, const int line, const int row, const int value);
+			void moveFound(Bill::Sudoku::Board *board, const int line, const int row, const int value);
 
-		friend class ::BillSolverTest;
-	};
+			friend class ::BillSolverTest;
+		};
 
-}
+	}
 }

@@ -13,8 +13,8 @@ void BoardTest::testClear() {
 	Board board;
 	board.clear();
 
-	for (int i = 0; i < 9; i++) {
-		for (int j = 0; j < 9; j++) {
+	for(int i = 0; i < 9; i++) {
+		for(int j = 0; j < 9; j++) {
 			std::stringstream err;
 			err << i << ":" << j;
 
@@ -25,41 +25,41 @@ void BoardTest::testClear() {
 }
 
 inline static void testCopy(const std::string oldValues, const std::string newValues) {
-    Board newBoard;
-    newBoard.read(newValues);
+	Board newBoard;
+	newBoard.read(newValues);
 
-    Board original;
-    original.read(oldValues);
-    original.copy(&newBoard);
+	Board original;
+	original.read(oldValues);
+	original.copy(&newBoard);
 
-    for (int i = 0; i < Board::GRID_SIZE; i++) {
-        for (int j = 0; j < Board::GRID_SIZE; j++) {
-            int expected = newBoard.get(i, j);
-            int actual = original.get(i, j);
+	for(int i = 0; i < Board::GRID_SIZE; i++) {
+		for(int j = 0; j < Board::GRID_SIZE; j++) {
+			int expected = newBoard.get(i, j);
+			int actual = original.get(i, j);
 
-            CPPUNIT_ASSERT_EQUAL(expected, actual);
-        }
-    }
+			CPPUNIT_ASSERT_EQUAL(expected, actual);
+		}
+	}
 }
 
 void BoardTest::testCopyEquals() {
-    testCopy("942005010|000830040|035000000|680900420|700213006|093006075|000000730|020094000|060700954",
-             "942005010|000830040|035000000|680900420|700213006|093006075|000000730|020094000|060700954");
+	testCopy("942005010|000830040|035000000|680900420|700213006|093006075|000000730|020094000|060700954",
+			 "942005010|000830040|035000000|680900420|700213006|093006075|000000730|020094000|060700954");
 }
 
 void BoardTest::testCopyDifferent() {
-    testCopy("001457936|007000200|306009005|130900042|864010309|070005018|700000503|009070001|613598400",
-             "942005010|000830040|035000000|680900420|700213006|093006075|000000730|020094000|060700954");
+	testCopy("001457936|007000200|306009005|130900042|864010309|070005018|700000503|009070001|613598400",
+			 "942005010|000830040|035000000|680900420|700213006|093006075|000000730|020094000|060700954");
 }
 
 void BoardTest::testCopyEmptyToFull() {
-    testCopy("000000000|000000000|000000000|000000000|000000000|000000000|000000000|000000000|000000000",
-             "942675318|176832549|835149267|681957423|754213896|293486175|419568732|527394681|368721954");
+	testCopy("000000000|000000000|000000000|000000000|000000000|000000000|000000000|000000000|000000000",
+			 "942675318|176832549|835149267|681957423|754213896|293486175|419568732|527394681|368721954");
 }
 
 void BoardTest::testCopyFullToEmpty() {
-    testCopy("942675318|176832549|835149267|681957423|754213896|293486175|419568732|527394681|368721954",
-             "000000000|000000000|000000000|000000000|000000000|000000000|000000000|000000000|000000000");
+	testCopy("942675318|176832549|835149267|681957423|754213896|293486175|419568732|527394681|368721954",
+			 "000000000|000000000|000000000|000000000|000000000|000000000|000000000|000000000|000000000");
 }
 
 inline static void testValidateBoard(const std::string values, const bool expected) {

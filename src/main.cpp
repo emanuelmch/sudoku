@@ -25,8 +25,8 @@ static inline void readBoard(Board *board, const int index) {
 static inline void printBoard(const Board *board) {
 	std::cout << board->usedCells() << "/" << Board::CELL_AMOUNT << "  ";
 
-	for (int i = 0; i < 9; i++) {
-		for (int j = 0; j < 9; j++) {
+	for(int i = 0; i < 9; i++) {
+		for(int j = 0; j < 9; j++) {
 			const int v = board->get(j, i);
 			std::cout << v;
 		}
@@ -38,21 +38,17 @@ static inline void printBoard(const Board *board) {
 void solveAllBoards(Solver *solver) {
 	Board board;
 
-	for (int i = 0; i < BOARD_COUNT; i++)
-	{
+	for(int i = 0; i < BOARD_COUNT; i++) {
 		readBoard(&board, i);
 
 		solver->solve(&board);
 
-		if (board.isFilled())
-		{
-			if (board.validate())
+		if(board.isFilled()) {
+			if(board.validate())
 				std::cout << "Board " << i << " solved! =)" << std::endl;
 			else
 				std::cout << "Board " << i << " was solved, but in an invalid way! =(" << std::endl;
-		}
-		else
-		{
+		} else {
 			std::cout << "Board " << i << " not solved! =( " << std::endl;
 
 			std::cout << "Before: ";

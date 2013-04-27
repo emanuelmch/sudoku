@@ -13,9 +13,9 @@ void BillSolverTest::tearDown() {}
 void BillSolverTest::testClearPossibilities() {
 	BillSolver solver;
 
-	for (int i = 0; i < Board::GRID_SIZE; i++) {
-		for (int j = 0; j < Board::GRID_SIZE; j++) {
-			for (int x = 0; x < Board::GRID_SIZE + 1; x++) {
+	for(int i = 0; i < Board::GRID_SIZE; i++) {
+		for(int j = 0; j < Board::GRID_SIZE; j++) {
+			for(int x = 0; x < Board::GRID_SIZE + 1; x++) {
 				solver.possibilities[i][j][x] = 2;
 			}
 		}
@@ -23,9 +23,9 @@ void BillSolverTest::testClearPossibilities() {
 
 	solver.clearPossibilities();
 
-	for (int i = 0; i < Board::GRID_SIZE; i++) {
-		for (int j = 0; j < Board::GRID_SIZE; j++) {
-			for (int x = 1; x < Board::GRID_SIZE + 1; x++) {
+	for(int i = 0; i < Board::GRID_SIZE; i++) {
+		for(int j = 0; j < Board::GRID_SIZE; j++) {
+			for(int x = 1; x < Board::GRID_SIZE + 1; x++) {
 				int v = solver.possibilities[i][j][x];
 
 				std::stringstream err;
