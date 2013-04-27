@@ -14,7 +14,7 @@ namespace Bill {
 			void registerCallback(SolverCallback);
 		private:
 			SolverCallback callback;
-			std::vector<Board*> process(const Board *);
+			std::vector<Board*> *process(const Board *) const;
 		};
 
 	}
