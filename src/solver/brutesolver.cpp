@@ -10,8 +10,7 @@ using std::vector;
 
 void Bill::Sudoku::BruteSolver::solve(Board *originalBoard) {
 	bool foundSolution = false;
-	Board *firstBoard = new Board();
-	firstBoard->copy(originalBoard);
+	Board *firstBoard = new Board(*originalBoard);
 
 	queue<Board*> boards;
 	boards.push(firstBoard);
@@ -40,7 +39,7 @@ void Bill::Sudoku::BruteSolver::solve(Board *originalBoard) {
 				delete newBoard;
 			} else if (newBoard->isFilled()) {
 				// Only valid boards get to this point, so if it's filled, we found our solution!
-				originalBoard->copy(newBoard);
+				originalBoard->read(newBoard);
 				foundSolution = true;
 				delete newBoard;
 			} else {
@@ -58,8 +57,7 @@ vector<Board*> *createPossibleBoards(const Board *original, const int x, const i
 	vector<Board*> *boards = new vector<Board*>();
 
 	for(int i = 1; i <= Board::GRID_SIZE; i++) {
-		Board *board = new Board();
-		board->copy(original);
+		Board *board = new Board(*original);
 		board->set(x, y, i);
 
 		if(board->validate()) {

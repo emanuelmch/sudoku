@@ -10,7 +10,6 @@ namespace Bill {
 		class BillSolver : public Solver {
 		public:
 			void solve(Board *);
-			void registerCallback(SolverCallback);
 
 		private:
 			int possibilities[Board::GRID_SIZE][Board::GRID_SIZE][Board::GRID_SIZE + 1];

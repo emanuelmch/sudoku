@@ -41,7 +41,7 @@ void Bill::Sudoku::Board::read(const std::string value) {
 	}
 }
 
-void Bill::Sudoku::Board::copy(const Board *board) {
+void Bill::Sudoku::Board::read(const Board *board) {
 	memcpy(values, board->values, sizeof(values));
 }
 
@@ -49,7 +49,7 @@ void Bill::Sudoku::Board::clear() {
 	memset(values, 0, sizeof(values));
 }
 
-bool Bill::Sudoku::Board::isFilled() {
+bool Bill::Sudoku::Board::isFilled() const {
 	for(int i = 0; i < 9; i++) {
 		for(int j = 0; j < 9; j++) {
 			if(values[i][j] == 0)
@@ -60,7 +60,7 @@ bool Bill::Sudoku::Board::isFilled() {
 	return true;
 }
 
-static inline bool validateMiniGrid(BoardValues &values, int x, int y) {
+static inline bool validateMiniGrid(const BoardValues &values, int x, int y) {
 	bool usedValues[10] = {false,};
 
 	for(int i = x; i < (x + 3); i++) {
@@ -80,7 +80,7 @@ static inline bool validateMiniGrid(BoardValues &values, int x, int y) {
 	return true;
 }
 
-bool Bill::Sudoku::Board::validate() {
+bool Bill::Sudoku::Board::validate() const {
 	// First, validate rows and columns
 	for(int i = 0; i < GRID_SIZE; i++) {
 		for(int j = 0; j < GRID_SIZE; j++) {

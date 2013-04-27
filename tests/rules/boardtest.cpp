@@ -30,7 +30,7 @@ inline static void testCopy(const std::string oldValues, const std::string newVa
 
 	Board original;
 	original.read(oldValues);
-	original.copy(&newBoard);
+	original.read(&newBoard);
 
 	for(int i = 0; i < Board::GRID_SIZE; i++) {
 		for(int j = 0; j < Board::GRID_SIZE; j++) {
