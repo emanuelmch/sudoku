@@ -5,9 +5,7 @@ SRC_DIR := ./src
 TSS_DIR := ./tests
 BUILD_DIR := ./build
 DBG_DIR := $(BUILD_DIR)/debug
-DBG_DEP_DIR := $(DBG_DIR)/deps
 REL_DIR := $(BUILD_DIR)/release
-REL_DEP_DIR := $(REL_DIR)/deps
 TST_DIR := $(BUILD_DIR)/test
 
 FLAGS := -std=c++11 -Wall -Wextra -Wfloat-equal -Wundef -Wunreachable-code -Wswitch-enum -ansi -pedantic
@@ -18,9 +16,9 @@ TEST_LIBS := -lcppunit
 
 SRCS := $(shell find $(SRC_DIR) -type f -name \*.cpp)
 DBG_OBJS := $(patsubst $(SRC_DIR)/%.cpp, $(DBG_DIR)/%.o, $(SRCS))
-DBG_DEPS := $(patsubst $(SRC_DIR)/%.cpp, $(DBG_DEP_DIR)/%.d, $(SRCS))
+DBG_DEPS := $(patsubst $(SRC_DIR)/%.cpp, $(DBG_DIR)/%.d, $(SRCS))
 REL_OBJS := $(patsubst $(SRC_DIR)/%.cpp, $(REL_DIR)/%.o, $(SRCS))
-REL_DEPS := $(patsubst $(SRC_DIR)/%.cpp, $(REL_DEP_DIR)/%.d, $(SRCS))
+REL_DEPS := $(patsubst $(SRC_DIR)/%.cpp, $(REL_DIR)/%.d, $(SRCS))
 
 TESTS := $(shell find $(TSS_DIR) -type f -name \*.cpp)
 TST_OBJS := $(patsubst $(TSS_DIR)/%.cpp, $(TST_DIR)/%.o, $(TESTS))
@@ -57,7 +55,7 @@ test: $(TST_OBJS) $(subst $(REL_DIR)/main.o,,$(REL_OBJS))
 #
 # DEPENDENCIES TARGETS
 #
-$(DBG_DEP_DIR)/%.d: $(SRC_DIR)/%.cpp
+$(DBG_DIR)/%.d: $(SRC_DIR)/%.cpp
 	@mkdir -p $(@D)
 	$(CXX) -E -M -MM -MF $@ $<
 # Gambiarras...
@@ -66,18 +64,18 @@ $(DBG_DEP_DIR)/%.d: $(SRC_DIR)/%.cpp
 	@cat $@.tmp >> $@
 	@rm $@.tmp
 
-$(REL_DEP_DIR)/%.d: $(SRC_DIR)/%.cpp
+$(REL_DIR)/%.d: $(SRC_DIR)/%.cpp
 	@mkdir -p $(@D)
 	$(CXX) -E -M -MM -MF $@ $<
 # Gambiarras...
 	@mv $@ $@.tmp
-	@echo -n "$(REL_DIR)/" > $@
+	@echo -n "$(@D)/" > $@
 	@cat $@.tmp >> $@
 	@rm $@.tmp
 
-$(DBG_DIR)/%.o: $(DBG_DEP_DIR)/%.d
+$(DBG_DIR)/%.o: $(DBG_DIR)/%.d
 
-$(REL_DIR)/%.o: $(REL_DEP_DIR)/%.d
+$(REL_DIR)/%.o: $(REL_DIR)/%.d
 
 #
 # OBJECT TARGETS
