@@ -98,11 +98,7 @@ $(TST_DIR)/%.o: $(TSS_DIR)/%.cpp
 clean:
 	rm -rf $(BUILD_DIR) release{,.exe} debug{,.exe} test{,.exe}
 
-todo:
-	@grep -rI "TODO" src
-	@grep -rI "TODO" tests
-
-.PHONY: clean todo
+.PHONY: clean
 
 # Code dependencies are not necessary for these these targets
 NODEPS := clean todo
